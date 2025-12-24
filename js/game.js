@@ -198,7 +198,7 @@ $(".btn").on("click", function () {
 });
 
 
-$(document).on("keydown", function () {
+$(document).on("keydown touchstart", function () {
     if (!gameStarted) {
 
         if (overlay.hasClass("overlay-active")) {

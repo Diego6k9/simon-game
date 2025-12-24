@@ -30,7 +30,7 @@ function nextSequence() {
  * @return {void} Does not return a value.
  */
 function playSound(name) {
-    new Audio("../assets/sounds/" + name + ".mp3").play();
+    new Audio("assets/sounds/" + name + ".mp3").play();
 }
 
 /**
@@ -120,4 +120,5 @@ $(document).on("keydown", function () {
         nextSequence();
     }
 })
+
 

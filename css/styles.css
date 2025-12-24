@@ -1,72 +1,103 @@
 body {
-  text-align: center;
-  background-color: #011F3F;
-  user-select: none;
+    text-align: center;
+    background-color: #011F3F;
+    user-select: none;
 }
 
 #level-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 3rem;
-  margin:  5%;
-  color: #fef2bf;
-  z-index: 2;
-  position: relative;
-  line-height: 1.5;
+    font-family: "Press Start 2P", cursive;
+    font-size: 3rem;
+    margin: 5%;
+    color: #fef2bf;
+    z-index: 2;
+    position: relative;
+    line-height: 1.5;
 }
 
 .container {
-  display: block;
-  width: 50%;
-  margin: auto;
+    display: block;
+    width: 50%;
+    margin: auto;
 }
 
 .btn {
-  margin: 25px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 10px solid #fef2bf;
-  border-radius: 20%;
-  cursor: pointer;
+    margin: 25px;
+    display: inline-block;
+    vertical-align: top;
+    height: 200px;
+    width: 200px;
+    border: 10px solid #fef2bf;
+    border-radius: 20%;
+    cursor: pointer;
+    position: relative;
+}
+
+.btn p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    font-family: "Press Start 2P", cursive;
 }
 
 .game-over {
-  background-color: red;
-  backdrop-filter: grayscale(0%);
+    background-color: red;
+    backdrop-filter: grayscale(0%);
 }
 
 .overlay-active {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  backdrop-filter: grayscale(70%);
-  -webkit-backdrop-filter: grayscale(70%);
-  z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: grayscale(70%);
+    -webkit-backdrop-filter: grayscale(70%);
+    z-index: 1;
+}
+
+.red-outline {
+    outline: 4px solid red;
+    outline-offset: 8px;
+}
+
+.green-outline {
+    outline: 4px solid green;
+    outline-offset: 8px;
 }
 
 .red {
-  background-color: red;
+    background-color: red;
 }
 
 .green {
-  background-color: green;
+    background-color: green;
 }
 
 .blue {
-  background-color: blue;
+    background-color: blue;
 }
 
 .yellow {
-  background-color: yellow;
+    background-color: yellow;
 }
 
 .pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
+    box-shadow: 0 0 20px white;
+    background-color: grey;
 }
 
 .level-color {
-  color: yellow;
+    color: yellow;
+}
+
+.black-text {
+    color: black;
+}
+
+.white-text {
+    color: white;
 }

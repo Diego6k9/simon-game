@@ -166,7 +166,7 @@ function endGame() {
     }, 250);
 
     playSound("wrong");
-    title.html("Game over! You reached <span class='level-color'>level " + level + "</span>.<br> Press any key to restart.");
+    title.html("Game over! You reached <span class='level-color'>level " + (level - 1) + "</span>.<br> Press any key to restart.");
 
     editEndgameUI();
     resetGameStats();

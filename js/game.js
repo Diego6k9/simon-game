@@ -1,3 +1,11 @@
+const sounds = {
+    green: new Audio("assets/sounds/green.mp3"),
+    red: new Audio("assets/sounds/red.mp3"),
+    yellow: new Audio("assets/sounds/yellow.mp3"),
+    blue: new Audio("assets/sounds/blue.mp3"),
+    wrong: new Audio("assets/sounds/wrong.mp3")
+};
+
 let buttonColors = ["green", "red", "yellow", "blue"];
 let gamePattern = [];
 let userClickedPattern = [];
@@ -37,7 +45,12 @@ function nextSequence() {
  * @return {void} Does not return a value.
  */
 function playSound(name) {
-    new Audio("assets/sounds/" + name + ".mp3").play();
+    let soundToPlay = sounds[name];
+
+    if (soundToPlay) {
+        soundToPlay.currentTime = 0;
+        soundToPlay.play();
+    }
 }
 
 /**

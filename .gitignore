@@ -1,0 +1,44 @@
+# JetBrains IDEs (WebStorm/IntelliJ IDEA/Rider/PhpStorm/etc.)
+.idea/
+*.iml
+
+# IDE local history and shelf
+.idea/shelf/
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/httpRequests
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/dynamic.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# JetBrains index/temp files
+.idea/**/contentModel.xml
+.idea/**/modules.xml
+.idea/**/caches/
+.idea/**/uiDesigner.xml
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Node/JS (common for WebStorm projects)
+node_modules/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Build output (if added later)
+dist/
+build/
+out/

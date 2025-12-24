@@ -3,6 +3,7 @@ let gamePattern = [];
 let userClickedPattern = [];
 let level = 0;
 let gameStarted = false;
+let buttonsClickable = false;
 let overlay = $("#game-over-overlay");
 
 /**
@@ -13,6 +14,7 @@ let overlay = $("#game-over-overlay");
  * @return {void} Does not return a value.
  */
 function nextSequence() {
+
     let randomNumber = Math.round(Math.random() * 3);
     let randomChosenColor = buttonColors[randomNumber];
     gamePattern.push(randomChosenColor);
@@ -21,6 +23,11 @@ function nextSequence() {
     playSound(randomChosenColor);
     level++;
     $("#level-title").text("Level " + level);
+
+    setTimeout(function () {
+        buttonsClickable = true;
+    }, 500); // Fade out + fade in
+
 }
 
 /**
@@ -59,11 +66,61 @@ function checkAnswer(currentLevel) {
 }
 
 /**
+ * Resets the game's statistics, including level and patterns.
+ *
+ * This method reinitializes the game state by setting the level to 0
+ * and clearing both the game-generated pattern and the user-clicked pattern.
+ *
+ * @return {void} No return value.
+ */
+function resetGameStats() {
+    level = 0;
+    gamePattern = [];
+    userClickedPattern = [];
+}
+
+/**
+ * Updates the visual state of the button elements to indicate correctness or incorrectness
+ * based on the user's input compared to the game pattern.
+ * Adds a red outline and a playful message to the button identified as incorrect,
+ * and adds a green outline to the button identified as correct.
+ *
+ * @return {void} This method does not return a value.
+ */
+function editFinalButtons() {
+
+    // Add outline and text to the wrong button pressed
+    let wrongButtonColor = userClickedPattern[userClickedPattern.length - 1];
+    let wrongButton = $("#" + wrongButtonColor)
+    wrongButton.addClass("red-outline");
+    wrongButton.html("<p>Got you :P</p>");
+
+    // Add outline to the correct button
+    let correctButtonColor = gamePattern[userClickedPattern.length - 1];
+    let correctButton = $("#" + correctButtonColor)
+    correctButton.addClass("green-outline");
+}
+
+/**
+ * Resets the state of all buttons with the class "btn" by performing the following actions:
+ * - Removes the "red-outline" CSS class.
+ * - Clears the inner HTML content of the buttons.
+ *
+ * @return {void} This method does not return a value.
+ */
+function resetButtons() {
+    let btn = $(".btn");
+    btn.removeClass("red-outline green-outline");
+    btn.html("");
+}
+
+/**
  * Terminates the ongoing game session, updates the UI to reflect the game-over state,
  * plays a failure sound, and resets game statistics to prepare for a new game.
  *
  * @return {void} This method does not return a value.
  */
+
 function endGame() {
     gameStarted = false;
     let body = $("body");
@@ -79,15 +136,14 @@ function endGame() {
     playSound("wrong");
     title.html("Game over! You reached <span class='level-color'>level " + level + "</span>.<br> Press any key to restart.");
 
-    // Reset game stats
-    level = 0;
-    gamePattern = [];
-    userClickedPattern = [];
+    editFinalButtons();
+    resetGameStats();
+
 }
 
 $(".btn").on("click", function () {
 
-    if (gameStarted) {
+    if (gameStarted && buttonsClickable) {
         let userChosenColor = this.id;
         userClickedPattern.push(userChosenColor);
         animatePress(userChosenColor);
@@ -98,6 +154,7 @@ $(".btn").on("click", function () {
 
             if (userClickedPattern.length === gamePattern.length) {
                 userClickedPattern = [];
+                buttonsClickable = false; // Prevent accidental clicks until we know the next color
                 setTimeout(nextSequence, 1000);
             }
 
@@ -116,9 +173,8 @@ $(document).on("keydown", function () {
             overlay.removeClass("overlay-active");
         }
 
+        resetButtons();
         gameStarted = true;
         nextSequence();
     }
 })
-
-

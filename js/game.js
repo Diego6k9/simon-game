@@ -80,14 +80,17 @@ function resetGameStats() {
 }
 
 /**
- * Updates the visual state of the button elements to indicate correctness or incorrectness
- * based on the user's input compared to the game pattern.
- * Adds a red outline and a playful message to the button identified as incorrect,
- * and adds a green outline to the button identified as correct.
+ * Updates the endgame UI by applying special effects to user and game buttons,
+ * creating a visual history of the game sequence, and animating a marquee track.
+ *
+ * The method performs the following actions:
+ * - Highlights the last incorrect button pressed by the user with a red outline and adds a textual indication.
+ * - Highlights the last correct button in the game sequence with a green outline.
+ * - Creates and animates a marquee that displays the entire game sequence as a scrolling history of color blocks.
  *
  * @return {void} This method does not return a value.
  */
-function editFinalButtons() {
+function editEndgameUI() {
 
     // Add outline and text to the wrong button pressed
     let wrongButtonColor = userClickedPattern[userClickedPattern.length - 1];
@@ -99,19 +102,49 @@ function editFinalButtons() {
     let correctButtonColor = gamePattern[userClickedPattern.length - 1];
     let correctButton = $("#" + correctButtonColor)
     correctButton.addClass("green-outline");
+
+    // Add marquee
+    let marqueeContainer = $(".marquee"); // Parent container
+    let marqueeTrack = $(".marquee-track");
+    marqueeTrack.empty();
+    marqueeTrack.css("animation", "none");
+
+    let htmlContent = "";
+    gamePattern.forEach(color => {
+        htmlContent += "<div class='history-block " + color + "'></div>";
+    });
+
+    marqueeTrack.html(htmlContent);
+    let parentWidth = marqueeContainer.width();
+    let trackWidth = gamePattern.length * (30 + 16);
+
+    marqueeTrack.css("--start-position", parentWidth + "px");
+
+    let totalDistance = parentWidth + trackWidth;
+    let speed = 200; // Pixel per second
+    let duration = totalDistance / speed;
+
+    setTimeout(() => {
+        marqueeTrack.css("animation", "fly-through " + duration + "s linear infinite");
+    }, 50)
+
+    setTimeout(() => {
+        marqueeContainer.removeClass("invisible");
+    }, 250);
 }
 
 /**
- * Resets the state of all buttons with the class "btn" by performing the following actions:
- * - Removes the "red-outline" CSS class.
- * - Clears the inner HTML content of the buttons.
+ * Resets the state of buttons and marquee elements on the page.
+ * Removes specific classes from buttons, clears their content, and hides the marquee element.
  *
  * @return {void} This method does not return a value.
  */
 function resetButtons() {
     let btn = $(".btn");
+    let marquee = $(".marquee");
     btn.removeClass("red-outline green-outline");
     btn.html("");
+    marquee.addClass("invisible");
 }
 
 /**
@@ -120,7 +153,6 @@ function resetButtons() {
  *
  * @return {void} This method does not return a value.
  */
-
 function endGame() {
     gameStarted = false;
     let body = $("body");
@@ -136,7 +168,7 @@ function endGame() {
     playSound("wrong");
     title.html("Game over! You reached <span class='level-color'>level " + level + "</span>.<br> Press any key to restart.");
 
-    editFinalButtons();
+    editEndgameUI();
     resetGameStats();
 
 }

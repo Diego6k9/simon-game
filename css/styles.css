@@ -59,6 +59,36 @@ body {
     z-index: 1;
 }
 
+.marquee {
+    margin-top: 3rem;
+    width: 80%;
+    left: 10%;
+    height: 60px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 1rem;
+    white-space: nowrap;
+    will-change: transform;
+    --start-position: 100%;
+}
+
+.history-block {
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+    flex-shrink: 0;
+    box-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
+    border-radius: 20%;
+}
+
 .red-outline {
     outline: 4px solid red;
     outline-offset: 8px;
@@ -100,4 +130,17 @@ body {
 
 .white-text {
     color: white;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+@keyframes fly-through {
+    0% {
+        transform: translateX(var(--start-position));
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }

@@ -4,7 +4,7 @@ An implementation of the classic Simon memory game using vanilla HTML, CSS, and 
 
 ## Getting Started
 
-Open `index.html` directly in your browser to play. No build step or server is required.
+Open [diego6k9.github.io/simon-game](https://diego6k9.github.io/simon-game) in your browser to play.
 
 ## Development
 
